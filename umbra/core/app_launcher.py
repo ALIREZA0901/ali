@@ -44,6 +44,28 @@ class AppLauncher:
             processes.append(subprocess.Popen(command))
         return processes
 
+    def stop_apps(self, names: Iterable[str], force: bool = False) -> None:
+        system = platform.system().lower()
+        for name in names:
+            if system == "windows":
+                self._stop_windows(name, force=force)
+            else:
+                self._stop_unix(name, force=force)
+
+    def _stop_windows(self, name: str, force: bool = False) -> None:
+        image_name = name if name.lower().endswith(".exe") else f"{name}.exe"
+        command = ["taskkill", "/IM", image_name]
+        if force:
+            command.append("/F")
+        subprocess.run(command, check=False)
+
+    def _stop_unix(self, name: str, force: bool = False) -> None:
+        command = ["pkill"]
+        if force:
+            command.append("-9")
+        command.extend(["-f", name])
+        subprocess.run(command, check=False)
+
     def _running_apps_windows(self) -> Set[str]:
         output = subprocess.check_output(["tasklist"], text=True, errors="ignore")
         return {line.split()[0].lower() for line in output.splitlines()[3:] if line.strip()}

@@ -17,3 +17,6 @@ class NetworkProfileManager:
 
     def get(self, name: str) -> NetworkProfile | None:
         return self._profiles.get(name.lower())
+
+    def to_dict(self) -> Dict[str, NetworkProfile]:
+        return {profile.name: profile for profile in self._profiles.values()}
