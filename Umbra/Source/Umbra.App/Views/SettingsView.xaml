@@ -1,0 +1,56 @@
+<UserControl x:Class="Umbra.Views.SettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <ScrollViewer VerticalScrollBarVisibility="Auto">
+    <StackPanel>
+      <TextBlock Text="Settings" FontSize="20" FontWeight="SemiBold" />
+      <TextBlock Text="Diagnostics are only available here with explicit confirmation." Foreground="{StaticResource Brush.Muted}" Margin="0,6,0,16" />
+
+      <GroupBox Header="General" Margin="0,0,0,12">
+        <StackPanel Margin="12">
+          <WrapPanel>
+            <TextBlock Text="Theme" Width="120" />
+            <ComboBox Width="160" SelectedItem="{Binding Config.Theme}">
+              <ComboBoxItem Content="Dark" />
+              <ComboBoxItem Content="Light" />
+            </ComboBox>
+          </WrapPanel>
+          <WrapPanel Margin="0,8,0,0">
+            <TextBlock Text="Language" Width="120" />
+            <ComboBox Width="160" SelectedItem="{Binding Config.Language}">
+              <ComboBoxItem Content="FA" />
+              <ComboBoxItem Content="EN" />
+            </ComboBox>
+          </WrapPanel>
+          <Button Content="Save Settings" Width="140" Command="{Binding SaveCommand}" Margin="0,12,0,0" />
+        </StackPanel>
+      </GroupBox>
+
+      <GroupBox Header="Permissions" Margin="0,0,0,12">
+        <StackPanel Margin="12">
+          <CheckBox Content="Allow light checks" IsChecked="{Binding Config.LightChecksAllowed}" />
+          <TextBlock Text="Only resolve + TCP connect checks. No speedtests." Foreground="{StaticResource Brush.Muted}" Margin="0,6,0,0" />
+        </StackPanel>
+      </GroupBox>
+
+      <GroupBox Header="Diagnostics" Margin="0,0,0,12">
+        <StackPanel Margin="12">
+          <Button Content="Run Speedtest" Command="{Binding RunSpeedTestCommand}" />
+          <Button Content="Run Streaming Check (Aparat)" Command="{Binding RunStreamingAparatCommand}" Background="#3A3F52" />
+          <Button Content="Run Streaming Check (Kick)" Command="{Binding RunStreamingKickCommand}" Background="#3A3F52" />
+          <Button Content="Run DNS Optimize" Command="{Binding RunDnsOptimizeCommand}" Background="#3A3F52" />
+          <Button Content="Run Reachability Check" Command="{Binding RunReachabilityCommand}" Background="#3A3F52" />
+        </StackPanel>
+      </GroupBox>
+
+      <GroupBox Header="Network Safety">
+        <StackPanel Margin="12">
+          <Button Content="Revert last DNS changes" Command="{Binding RevertDnsCommand}" Background="#3A3F52" />
+          <Button Content="Revert last Routing changes" Command="{Binding RevertRoutingCommand}" Background="#3A3F52" />
+          <Button Content="Revert last Load Balance changes" Command="{Binding RevertLoadBalanceCommand}" Background="#3A3F52" />
+          <Button Content="Emergency Stop VPN / Restore defaults" Command="{Binding EmergencyStopCommand}" Background="#7A3232" />
+        </StackPanel>
+      </GroupBox>
+    </StackPanel>
+  </ScrollViewer>
+</UserControl>

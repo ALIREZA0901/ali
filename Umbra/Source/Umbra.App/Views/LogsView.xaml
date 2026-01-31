@@ -1,0 +1,25 @@
+<UserControl x:Class="Umbra.Views.LogsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <StackPanel>
+    <TextBlock Text="Logs" FontSize="20" FontWeight="SemiBold" />
+    <TextBlock Text="App, core, and diagnostics logs." Foreground="{StaticResource Brush.Muted}" Margin="0,6,0,16" />
+
+    <TabControl>
+      <TabItem Header="App Logs">
+        <TextBox Text="Log output" IsReadOnly="True" Height="240" />
+      </TabItem>
+      <TabItem Header="Core Logs">
+        <TextBox Text="Core output" IsReadOnly="True" Height="240" />
+      </TabItem>
+      <TabItem Header="Diagnostics Logs">
+        <TextBox Text="Diagnostics output" IsReadOnly="True" Height="240" />
+      </TabItem>
+    </TabControl>
+
+    <WrapPanel Margin="0,12,0,0">
+      <Button Content="Copy to Clipboard" Command="{Binding CopyCommand}" />
+      <Button Content="Export Logs" Command="{Binding ExportCommand}" Margin="8,0,0,0" />
+    </WrapPanel>
+  </StackPanel>
+</UserControl>
