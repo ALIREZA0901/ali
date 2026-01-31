@@ -1,0 +1,41 @@
+<UserControl x:Class="Umbra.Views.RoutingView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <ScrollViewer VerticalScrollBarVisibility="Auto">
+    <StackPanel>
+      <TextBlock Text="Routing" FontSize="20" FontWeight="SemiBold" />
+      <TextBlock Text="Per-app routing and Umbra Load Balance." Foreground="{StaticResource Brush.Muted}" Margin="0,6,0,16" />
+
+      <GroupBox Header="Connections" Margin="0,0,0,12">
+        <StackPanel Margin="12">
+          <ItemsControl ItemsSource="{Binding Connections}" />
+          <TextBlock Text="Load Balance uses Windows route metrics (not a single merged IP)." Foreground="{StaticResource Brush.Muted}" Margin="0,8,0,0" />
+        </StackPanel>
+      </GroupBox>
+
+      <GroupBox Header="App Routing" Margin="0,0,0,12">
+        <StackPanel Margin="12">
+          <WrapPanel Margin="0,0,0,8">
+            <TextBox Width="220" Text="Search apps" />
+            <CheckBox Content="Include background" Margin="12,0,0,0" />
+            <CheckBox Content="Include services" Margin="12,0,0,0" />
+          </WrapPanel>
+          <DataGrid ItemsSource="{Binding Apps}" Height="240">
+            <DataGrid.Columns>
+              <DataGridTextColumn Header="App" Binding="{Binding}" Width="*" />
+              <DataGridTextColumn Header="Route" Binding="{Binding}" Width="200" />
+            </DataGrid.Columns>
+          </DataGrid>
+          <Button Content="Apply Routing" Command="{Binding ApplyRoutingCommand}" Width="140" />
+        </StackPanel>
+      </GroupBox>
+
+      <GroupBox Header="Umbra Load Balance">
+        <StackPanel Margin="12">
+          <TextBlock Text="Create and apply load balance connections per profile." Foreground="{StaticResource Brush.Muted}" />
+          <Button Content="Apply Load Balance" Command="{Binding ApplyLoadBalanceCommand}" Width="160" Margin="0,8,0,0" />
+        </StackPanel>
+      </GroupBox>
+    </StackPanel>
+  </ScrollViewer>
+</UserControl>

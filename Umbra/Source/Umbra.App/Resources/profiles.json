@@ -1,0 +1,14 @@
+[
+  {
+    "Name": "Streaming",
+    "IsBuiltIn": true
+  },
+  {
+    "Name": "Gaming",
+    "IsBuiltIn": true
+  },
+  {
+    "Name": "Daily",
+    "IsBuiltIn": true
+  }
+]

@@ -1,0 +1,55 @@
+<Window x:Class="Umbra.Views.FirstRunWizardWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Welcome to Umbra" Height="520" Width="720" WindowStartupLocation="CenterScreen">
+  <Window.Resources>
+    <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+  </Window.Resources>
+  <Grid Margin="24">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="*" />
+      <RowDefinition Height="Auto" />
+    </Grid.RowDefinitions>
+
+    <StackPanel>
+      <TextBlock Text="First-run setup" FontSize="20" FontWeight="SemiBold" />
+      <TextBlock Text="Umbra will not run diagnostics automatically. You remain in full control." Foreground="{StaticResource Brush.Muted}" Margin="0,6,0,0" />
+    </StackPanel>
+
+    <Grid Grid.Row="1" Margin="0,24,0,24">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="*" />
+      </Grid.RowDefinitions>
+
+      <StackPanel Visibility="{Binding IsStep1, Converter={StaticResource BooleanToVisibilityConverter}}">
+        <TextBlock Text="Step 1 - Copilot Level" FontWeight="SemiBold" FontSize="16" />
+        <TextBlock Text="Choose how much guidance you want." Foreground="{StaticResource Brush.Muted}" Margin="0,6,0,12" />
+        <ComboBox ItemsSource="{Binding CopilotLevels}" SelectedItem="{Binding SelectedCopilot}" Width="240" />
+        <TextBlock Text="Basic: minimal hints" Margin="0,12,0,0" />
+        <TextBlock Text="Helpful: practical suggestions + warnings" />
+        <TextBlock Text="Expert: advanced tuning hints (never auto-apply)" />
+      </StackPanel>
+
+      <StackPanel Visibility="{Binding IsStep2, Converter={StaticResource BooleanToVisibilityConverter}}">
+        <TextBlock Text="Step 2 - Default DNS Packs" FontWeight="SemiBold" FontSize="16" />
+        <TextBlock Text="Pick default DNS packs. This will only apply when you click Apply DNS." Foreground="{StaticResource Brush.Muted}" Margin="0,6,0,12" />
+        <CheckBox Content="Enable IR defaults" IsChecked="{Binding EnableIrDefaults}" />
+        <CheckBox Content="Enable Global defaults" IsChecked="{Binding EnableGlobalDefaults}" />
+      </StackPanel>
+
+      <StackPanel Visibility="{Binding IsStep3, Converter={StaticResource BooleanToVisibilityConverter}}">
+        <TextBlock Text="Step 3 - Light Checks Permission" FontWeight="SemiBold" FontSize="16" />
+        <TextBlock Text="Allow lightweight checks (DNS resolve + TCP connect)." Foreground="{StaticResource Brush.Muted}" Margin="0,6,0,12" />
+        <TextBlock Text="No speedtest. No heavy traffic." Foreground="{StaticResource Brush.Muted}" Margin="0,0,0,12" />
+        <CheckBox Content="Allow light checks" IsChecked="{Binding LightChecksAllowed}" />
+      </StackPanel>
+    </Grid>
+
+    <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+      <Button Content="Back" Width="90" Command="{Binding BackCommand}" />
+      <Button Content="Next" Width="90" Command="{Binding NextCommand}" Margin="8,0,0,0" />
+      <Button Content="Finish" Width="90" Command="{Binding FinishCommand}" Margin="8,0,0,0" />
+    </StackPanel>
+  </Grid>
+</Window>
